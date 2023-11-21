@@ -8,15 +8,17 @@ import {
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 import { AppRouteNames, QuizStackProps } from "../Types";
 
 interface ButtonProps {
   label: string;
   imageUrl: ImageProps;
   navigate: AppRouteNames;
+  colors: string[];
 }
 
-const Button = ({ label, imageUrl, navigate }: ButtonProps) => {
+const Button = ({ label, imageUrl, navigate, colors }: ButtonProps) => {
   const navigation = useNavigation<QuizStackProps["navigation"]>();
 
   const handleGoTo = () => {
@@ -24,40 +26,77 @@ const Button = ({ label, imageUrl, navigate }: ButtonProps) => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={handleGoTo} style={styles.button_container}>
-        <Image source={imageUrl} style={styles.image} />
-        <View style={styles.button}>
-          <Text style={styles.button_text}>{label}</Text>
+    <View style={styles.button}>
+      <LinearGradient
+        colors={colors}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.gradient}
+      >
+        <View style={styles.buttonContentContainer}>
+          <Image source={imageUrl} style={styles.image} />
+          <View style={{ alignItems: "flex-end", gap: 10 }}>
+            <Text
+              style={{
+                fontFamily: "AmaticSC-Bold",
+                fontSize: 50,
+                marginRight: 10,
+                color: "white",
+              }}
+            >
+              {label}
+            </Text>
+            <TouchableOpacity style={styles.navigateButton}>
+              <Image
+                style={styles.buttonImage}
+                source={require("../../assets/buttons/rightArrow.png")}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </TouchableOpacity>
+      </LinearGradient>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: "45%",
+  button: {
+    backgroundColor: "#3498db",
+    borderRadius: 10,
+    width: 400,
+    height: 200,
+  },
+  gradient: {
+    flex: 1,
+    borderRadius: 5,
+  },
+  buttonContentContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
+    width: "100%",
+  },
+  navigateButton: {
+    paddingRight: 20,
+  },
+  text: {
+    color: "white",
+    marginRight: 10,
+    fontWeight: "bold",
+    fontFamily: "AmaticSC-Regular",
+    fontSize: 30,
+  },
+  buttonImage: {
+    padding: 10,
+    width: 50,
     height: 50,
   },
-  button_container: {
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    width: "100%",
-    height: "100%",
-    flexDirection: "row",
-    borderWidth: 1,
-    borderColor: "black",
-  },
   image: {
-    width: 30,
-    height: 30,
+    width: "50%",
+    height: 180,
+    resizeMode: "contain",
   },
-  button: {},
-  button_text: {},
 });
 
 export default Button;

@@ -11,16 +11,18 @@ import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthStackNavigationType } from "../Types";
-import axios from "axios";
 import useAuthStore from "../zustand/AuthStore";
 import { AntDesign } from "@expo/vector-icons";
-import { API_URL } from "../API_URL";
+import { FIREBASE_AUTH } from "../API_URL";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+
+  const auth = FIREBASE_AUTH;
 
   const setUser = useAuthStore((state) => state.setUser);
 
@@ -30,13 +32,9 @@ const Login = () => {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const res = await axios.post(`${API_URL}/api/user/login`, {
-        email: email,
-        password: password,
-      });
+      await signInWithEmailAndPassword(auth, email, password);
       setLoading(false);
       setUser(email);
-      console.log(res.data);
     } catch (error) {
       setLoading(false);
       Toast.show({
@@ -103,7 +101,7 @@ export default Login;
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    resizeMode: "cover", // You can adjust the resizeMode as needed
+    resizeMode: "cover",
     paddingTop: 170,
     alignItems: "center",
     backgroundColor: "#D5D5D5",

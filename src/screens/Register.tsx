@@ -12,8 +12,8 @@ import { AuthStackNavigationType } from "../Types";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import dayjs from "dayjs";
 import Toast from "react-native-toast-message";
-import axios from "axios";
-import { API_URL } from "../API_URL";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { FIREBASE_AUTH } from "../API_URL";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -23,6 +23,8 @@ const Register = () => {
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
   const [date, setDate] = useState<Date>(new Date());
   const [loading, setLoading] = useState<boolean>(false);
+
+  const auth = FIREBASE_AUTH;
 
   const onChangeSelectedDate = (selectedDate: any) => {
     const formattedDate = new Date(selectedDate);
@@ -49,13 +51,8 @@ const Register = () => {
         });
         return;
       }
+      await createUserWithEmailAndPassword(auth, email, password);
 
-      await axios.post(`${API_URL}/api/user/register`, {
-        email: email,
-        name: name,
-        password: password,
-        birthday: date,
-      });
       Toast.show({
         type: "success",
         text1: `Successfully registered your account.`,

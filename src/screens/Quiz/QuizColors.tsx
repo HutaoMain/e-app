@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const QuizColors = () => {
   const [questionIndex, setQuestionIndex] = useState<number>(0);
@@ -41,7 +42,7 @@ const QuizColors = () => {
   const currentQuestion = questions[questionIndex];
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.question}>{currentQuestion.question}</Text>
       {currentQuestion.options.map((option, index) => (
         <TouchableOpacity
@@ -55,7 +56,7 @@ const QuizColors = () => {
       <Text style={styles.score}>
         Score: {score}/{questions.length}
       </Text>
-    </View>
+    </SafeAreaView>
   );
 };
 

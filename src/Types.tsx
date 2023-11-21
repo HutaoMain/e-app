@@ -21,7 +21,8 @@ export type AppRouteNames =
   | "QuizAnimals"
   | "QuizNumbers"
   | "QuizAlphabets"
-  | "QuizColors";
+  | "QuizColors"
+  | "LessonMath";
 
 export type AuthStackNavigationType = {
   Login: undefined;
@@ -29,12 +30,14 @@ export type AuthStackNavigationType = {
 };
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 export type QuizStackNavigationType = {
   Home: undefined;
   QuizAnimals: undefined;
   QuizNumbers: undefined;
   QuizAlphabets: undefined;
   QuizColors: undefined;
+  LessonMath: undefined;
 };
 
 export type QuizStackProps = NativeStackScreenProps<

@@ -5,8 +5,12 @@ const Navbar = () => {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.welcome}>Welcome,</Text>
-        <Text style={styles.name}>Name here</Text>
+        <Text style={{ fontFamily: "AmaticSC-Bold", fontSize: 40 }}>
+          Welcome,
+        </Text>
+        <Text style={{ fontFamily: "AmaticSC-Bold", fontSize: 30 }}>
+          John Smith
+        </Text>
       </View>
       <Image
         source={require("../../assets/reading.png")}
@@ -25,19 +29,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: "center",
     marginBottom: 20,
+    marginTop: 20,
   },
   image: {
     width: 75,
     height: 75,
     borderRadius: 100,
     marginTop: 10,
-  },
-  welcome: {
-    fontSize: 20,
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: "bold",
   },
 });
 

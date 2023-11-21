@@ -38,3 +38,5 @@ yarn-error.*
 /src/API_URL.tsx
 
 .vscode
+package-lock.json
+assets
