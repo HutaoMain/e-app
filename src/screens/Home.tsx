@@ -26,21 +26,21 @@ const Home = () => {
               <Button
                 label="Alphabets"
                 imageUrl={require("../../assets/buttons/alphabets.png")}
-                navigate="QuizAnimals"
+                navigate="Alphabets"
                 colors={["#609CEB", "#0063B2"]}
               />
 
               <Button
                 label="Numbers"
                 imageUrl={require("../../assets/buttons/numbers.png")}
-                navigate="QuizAnimals"
+                navigate="Numbers"
                 colors={["#D2BB51", "#D29941"]}
               />
 
               <Button
                 label="Animals"
                 imageUrl={require("../../assets/buttons/animals.png")}
-                navigate="QuizAnimals"
+                navigate="Animals"
                 colors={["#B5C0FE", "#A1ADFA", "#8D9BFA"]}
               />
             </View>
@@ -48,7 +48,26 @@ const Home = () => {
 
           <View style={styles.slide}>
             <View style={styles.buttonsContainer}>
-              {/* Add the next set of buttons for the second screen */}
+              <Button
+                label="Shapes"
+                imageUrl={require("../../assets/buttons/shapes.png")}
+                navigate="Shapes"
+                colors={["#609CEB", "#0063B2"]}
+              />
+
+              <Button
+                label="Math"
+                imageUrl={require("../../assets/buttons/math.png")}
+                navigate="Math"
+                colors={["#D2BB51", "#D29941"]}
+              />
+
+              <Button
+                label="Emotions"
+                imageUrl={require("../../assets/buttons/emotions.png")}
+                navigate="Emotions"
+                colors={["#B5C0FE", "#A1ADFA", "#8D9BFA"]}
+              />
             </View>
           </View>
         </Swiper>

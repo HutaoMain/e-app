@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const AlphabetButtons = () => {
+const Emotions = () => {
   return (
     <View>
-      <Text>AlphabetButtons</Text>
+      <Text>Emotions</Text>
     </View>
   );
 };
 
-export default AlphabetButtons;
+export default Emotions;

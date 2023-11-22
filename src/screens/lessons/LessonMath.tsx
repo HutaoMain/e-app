@@ -2,10 +2,10 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
-import { QuizStackProps } from "../../Types";
+import { LearningStackProps } from "../../types/NavigationTypes";
 
 const LessonMath = () => {
-  const navigate = useNavigation<QuizStackProps["navigation"]>();
+  const navigate = useNavigation<LearningStackProps["navigation"]>();
 
   return (
     <SafeAreaView style={{ height: "100%", paddingTop: 0, marginTop: 0 }}>

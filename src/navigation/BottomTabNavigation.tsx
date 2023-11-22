@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Person from "../screens/Person";
-import QuizStackNavigation from "./QuizStackNavigation";
+import HomeStackNavigation from "./HomeStackNavigation";
 
 const BottomTabNavigation = () => {
   const Tab = createBottomTabNavigator();
@@ -38,7 +38,7 @@ const BottomTabNavigation = () => {
     >
       <Tab.Screen
         name="QuizStack"
-        component={QuizStackNavigation}
+        component={HomeStackNavigation}
         options={{ headerShown: false }}
       />
       <Tab.Screen

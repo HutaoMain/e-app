@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { AuthStackNavigationType } from "../Types";
+import { AuthStackNavigationType } from "../types/NavigationTypes";
 import useAuthStore from "../zustand/AuthStore";
 import { AntDesign } from "@expo/vector-icons";
 import { FIREBASE_AUTH } from "../API_URL";

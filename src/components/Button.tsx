@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-import { AppRouteNames, QuizStackProps } from "../Types";
+import { AppRouteNames, LearningStackProps } from "../types/NavigationTypes";
 
 interface ButtonProps {
   label: string;
@@ -19,7 +19,7 @@ interface ButtonProps {
 }
 
 const Button = ({ label, imageUrl, navigate, colors }: ButtonProps) => {
-  const navigation = useNavigation<QuizStackProps["navigation"]>();
+  const navigation = useNavigation<LearningStackProps["navigation"]>();
 
   const handleGoTo = () => {
     navigation.navigate(navigate);
@@ -46,7 +46,10 @@ const Button = ({ label, imageUrl, navigate, colors }: ButtonProps) => {
             >
               {label}
             </Text>
-            <TouchableOpacity style={styles.navigateButton}>
+            <TouchableOpacity
+              style={styles.navigateButton}
+              onPress={handleGoTo}
+            >
               <Image
                 style={styles.buttonImage}
                 source={require("../../assets/buttons/rightArrow.png")}

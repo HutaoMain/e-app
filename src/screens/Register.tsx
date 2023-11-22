@@ -4,16 +4,24 @@ import {
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  ImageBackground,
+  Image,
 } from "react-native";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { AuthStackNavigationType } from "../Types";
+import { AuthStackNavigationType } from "../types/NavigationTypes";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import dayjs from "dayjs";
 import Toast from "react-native-toast-message";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FIREBASE_AUTH } from "../API_URL";
+import {
+  AntDesign,
+  Fontisto,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -75,76 +83,88 @@ const Register = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Registration</Text>
-      <View style={styles.input_container}>
-        <Text style={styles.input_label}>Email:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-        />
-      </View>
-      <View style={styles.input_container}>
-        <Text style={styles.input_label}>Full Name:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Full Name"
-          value={name}
-          onChangeText={setName}
-        />
-      </View>
-      <View style={styles.input_container}>
-        <Text style={styles.input_label}>Password:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-      </View>
-      <View style={styles.input_container}>
-        <Text style={styles.input_label}>Confirm Password:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry
-        />
-      </View>
-      <View style={styles.input_container}>
-        <Text style={styles.input_label}>Birthday:</Text>
-        <TouchableOpacity style={styles.input} onPress={toggleDate}>
-          <Text>{dayjs(date).format("YYYY-MM-DD")}</Text>
-        </TouchableOpacity>
-      </View>
-      {showDatePicker && (
-        <DateTimePicker
-          display="spinner"
-          value={date}
-          mode="date"
-          onChange={(e) => onChangeSelectedDate(e.nativeEvent.timestamp)}
-        />
-      )}
-      <TouchableOpacity
-        style={[
-          styles.button,
-          email && name && password && confirmPassword
-            ? styles.buttonEnabled
-            : styles.buttonDisabled,
-        ]}
-        onPress={handleRegistration}
-        disabled={!email || !name || !password || !confirmPassword}
+      <ImageBackground
+        source={require("../../assets/login-bg.jpg")}
+        style={styles.backgroundImage}
       >
-        <Text style={styles.buttonText}>
-          {loading ? "Please wait..." : "Register"}
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleGoBackToLogin}>
-        <Text style={styles.buttonGoBack}>Go back to Login</Text>
-      </TouchableOpacity>
+        <Image
+          source={require("../../assets/e-logo.png")}
+          style={styles.logo}
+        />
+        <View style={styles.input_container}>
+          <MaterialCommunityIcons
+            name="email-outline"
+            size={24}
+            color="black"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+          />
+        </View>
+        <View style={styles.input_container}>
+          <Ionicons name="text" size={20} color="black" />
+          <TextInput
+            style={styles.input}
+            placeholder="Full Name"
+            value={name}
+            onChangeText={setName}
+          />
+        </View>
+        <View style={styles.input_container}>
+          <AntDesign name="lock" size={24} color="black" />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.input_container}>
+          <AntDesign name="lock" size={24} color="black" />
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.input_container}>
+          <Fontisto name="date" size={22} color="black" />
+          <TouchableOpacity style={styles.input} onPress={toggleDate}>
+            <Text>{dayjs(date).format("YYYY-MM-DD")}</Text>
+          </TouchableOpacity>
+        </View>
+        {showDatePicker && (
+          <DateTimePicker
+            display="spinner"
+            value={date}
+            mode="date"
+            onChange={(e) => onChangeSelectedDate(e.nativeEvent.timestamp)}
+          />
+        )}
+        <TouchableOpacity
+          style={[
+            styles.button,
+            // email && name && password && confirmPassword
+            //   ? styles.buttonEnabled
+            //   : styles.buttonDisabled,
+          ]}
+          onPress={handleRegistration}
+          // disabled={!email || !name || !password || !confirmPassword}
+        >
+          <Text style={styles.buttonText}>
+            {loading ? "Please wait..." : "Register"}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleGoBackToLogin}>
+          <Text style={styles.buttonGoBack}>Go back to Login</Text>
+        </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 };
@@ -154,31 +174,35 @@ export default Register;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+    paddingTop: 80,
     alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#D5D5D5",
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
+  logo: {
+    width: "90%",
+    height: 100,
+    marginBottom: 10,
   },
   input_container: {
     width: "90%",
-  },
-  input_label: {
-    paddingLeft: 5,
-  },
-  input: {
-    width: "100%",
-    height: 40,
+    height: 50,
+    paddingLeft: 10,
+    marginVertical: 10,
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 1,
     borderColor: "black",
-    borderRadius: 10,
+    borderRadius: 15,
+    backgroundColor: "white",
+  },
+  input: {
+    width: "80%",
+    height: 40,
     padding: 10,
-    paddingLeft: 13,
-    marginBottom: 10,
-    marginTop: 3,
   },
   button: {
     width: "90%",
@@ -187,6 +211,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderRadius: 10,
     marginVertical: 10,
+    backgroundColor: "#EB9F4A",
   },
   buttonEnabled: {
     backgroundColor: "#E44203",
@@ -196,7 +221,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
   },
   buttonText: {
-    color: "white",
+    color: "black",
     textAlign: "center",
     lineHeight: 40,
     fontSize: 16,

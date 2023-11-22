@@ -5,107 +5,107 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const alphabetData = [
   {
     letter: "A",
-    audioFileName: require("../../../assets/alphabet_sounds/a.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/A.mp3"),
   },
   {
     letter: "B",
-    audioFileName: require("../../../assets/alphabet_sounds/b.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/b.mp3"),
   },
   {
     letter: "C",
-    audioFileName: require("../../../assets/alphabet_sounds/c.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/c.mp3"),
   },
   {
     letter: "D",
-    audioFileName: require("../../../assets/alphabet_sounds/d.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/d.mp3"),
   },
   {
     letter: "E",
-    audioFileName: require("../../../assets/alphabet_sounds/e.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/e.mp3"),
   },
   {
     letter: "F",
-    audioFileName: require("../../../assets/alphabet_sounds/f.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/f.mp3"),
   },
   {
     letter: "G",
-    audioFileName: require("../../../assets/alphabet_sounds/g.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/g.mp3"),
   },
   {
     letter: "H",
-    audioFileName: require("../../../assets/alphabet_sounds/h.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/h.mp3"),
   },
   {
     letter: "I",
-    audioFileName: require("../../../assets/alphabet_sounds/i.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/i.mp3"),
   },
   {
     letter: "J",
-    audioFileName: require("../../../assets/alphabet_sounds/j.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/j.mp3"),
   },
   {
     letter: "K",
-    audioFileName: require("../../../assets/alphabet_sounds/k.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/k.mp3"),
   },
   {
     letter: "L",
-    audioFileName: require("../../../assets/alphabet_sounds/l.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/l.mp3"),
   },
   {
     letter: "M",
-    audioFileName: require("../../../assets/alphabet_sounds/m.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/m.mp3"),
   },
   {
     letter: "N",
-    audioFileName: require("../../../assets/alphabet_sounds/n.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/n.mp3"),
   },
   {
     letter: "O",
-    audioFileName: require("../../../assets/alphabet_sounds/o.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/o.mp3"),
   },
   {
     letter: "P",
-    audioFileName: require("../../../assets/alphabet_sounds/p.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/p.mp3"),
   },
   {
     letter: "Q",
-    audioFileName: require("../../../assets/alphabet_sounds/q.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/q.mp3"),
   },
   {
     letter: "R",
-    audioFileName: require("../../../assets/alphabet_sounds/r.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/r.mp3"),
   },
   {
     letter: "S",
-    audioFileName: require("../../../assets/alphabet_sounds/s.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/s.mp3"),
   },
   {
     letter: "T",
-    audioFileName: require("../../../assets/alphabet_sounds/t.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/t.mp3"),
   },
   {
     letter: "U",
-    audioFileName: require("../../../assets/alphabet_sounds/u.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/u.mp3"),
   },
   {
     letter: "V",
-    audioFileName: require("../../../assets/alphabet_sounds/v.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/v.mp3"),
   },
   {
     letter: "W",
-    audioFileName: require("../../../assets/alphabet_sounds/w.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/w.mp3"),
   },
   {
     letter: "X",
-    audioFileName: require("../../../assets/alphabet_sounds/x.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/x.mp3"),
   },
   {
     letter: "Y",
-    audioFileName: require("../../../assets/alphabet_sounds/y.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/y.mp3"),
   },
   {
     letter: "Z",
-    audioFileName: require("../../../assets/alphabet_sounds/z.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/z.mp3"),
   },
 ];
 
