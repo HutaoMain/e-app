@@ -15,7 +15,7 @@ const animalGif = {
 };
 
 const animalSounds = {
-  Cat: require("../../assets/alphabetSounds/A.mp3"),
+  Cat: require("../../assets/alphabetSounds/a.mp3"),
   B: require("../../assets/alphabetSounds/b.mp3"),
 };
 

@@ -5,21 +5,16 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
+  Switch,
+  Text,
 } from "react-native";
 import { Audio } from "expo-av";
 import ScreenNavbar from "../components/ScreenNavbar";
-
-const alphabetGifs = {
-  A: require("../../assets/letters/A/letterA.gif"),
-  B: require("../../assets/letters/B/letterB.gif"),
-};
-
-const alphabetSounds = {
-  A: require("../../assets/alphabetSounds/A.mp3"),
-  B: require("../../assets/alphabetSounds/b.mp3"),
-};
+import QuizAlphabets from "./Quiz/QuizAlphabets";
+import { alphabetGifs, alphabetSounds } from "../types/Utilities";
 
 const Alphabets = () => {
+  const [showQuiz, setShowQuiz] = useState<boolean>(false);
   const [currentAlphabet, setCurrentAlphabet] =
     useState<keyof typeof alphabetGifs>("A");
 
@@ -37,6 +32,7 @@ const Alphabets = () => {
     }
 
     setCurrentAlphabet(alphabetList[newIndex]);
+    setShowQuiz(false);
   };
 
   const playSound = async () => {
@@ -50,6 +46,10 @@ const Alphabets = () => {
     }
   };
 
+  const toggleComponent = () => {
+    setShowQuiz(!showQuiz);
+  };
+
   return (
     <View style={styles.alphabets}>
       <ImageBackground
@@ -57,10 +57,47 @@ const Alphabets = () => {
         style={styles.container}
       >
         <ScreenNavbar />
-        <Image
-          source={alphabetGifs[currentAlphabet] as any}
-          style={styles.gif}
-        />
+
+        <View style={styles.toggleContainer}>
+          <Text
+            style={{
+              fontFamily: "AmaticSC-Bold",
+              fontSize: 40,
+              marginRight: 10,
+            }}
+          >
+            Switch here to go to Quiz
+          </Text>
+          <Switch
+            value={showQuiz}
+            onValueChange={toggleComponent}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={showQuiz ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            style={styles.switch}
+          />
+        </View>
+
+        {showQuiz ? (
+          <QuizAlphabets
+            currentAlphabet={currentAlphabet}
+            alphabetList={
+              Object.keys(alphabetGifs) as (keyof typeof alphabetGifs)[]
+            }
+            onSelectAnswer={(isCorrect) => {
+              // Handle the answer, e.g., show a message or update score
+              console.log(
+                `Selected ${isCorrect ? "correct" : "incorrect"} answer`
+              );
+              // Proceed to the next question or handle as needed
+            }}
+          />
+        ) : (
+          <Image
+            source={alphabetGifs[currentAlphabet] as any}
+            style={styles.gif}
+          />
+        )}
 
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
@@ -105,6 +142,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "relative",
   },
+  toggleContainer: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    marginTop: 40,
+  },
+  switch: {
+    alignSelf: "center",
+    transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }], // Adjust the size of the switch
+  },
   gif: {
     width: 400,
     height: 400,
@@ -113,7 +161,7 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginTop: 50,
+    marginTop: 30,
     gap: 10,
   },
   button: {
@@ -123,10 +171,6 @@ const styles = StyleSheet.create({
   arrow: {
     width: 100,
     height: 100,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
   },
 });
 

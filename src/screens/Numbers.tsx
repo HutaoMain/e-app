@@ -10,18 +10,34 @@ import ScreenNavbar from "../components/ScreenNavbar";
 import { Audio } from "expo-av";
 
 const numberGif = {
-  One: require("../../assets/numbers/One/giphy.gif"),
-  B: require("../../assets/letters/B/letterB.gif"),
+  one: require("../../assets/numbers/one/number1.gif"),
+  two: require("../../assets/numbers/two/number2.gif"),
+  three: require("../../assets/numbers/three/number3.gif"),
+  four: require("../../assets/numbers/four/number4.gif"),
+  five: require("../../assets/numbers/five/number5.gif"),
+  six: require("../../assets/numbers/six/number6.gif"),
+  // seven: require("../../assets/numbers/seven/number7.gif"),
+  // eight: require("../../assets/numbers/eight/number8.gif"),
+  // nine: require("../../assets/numbers/nine/number9.gif"),
+  // ten: require("../../assets/numbers/ten/number10.gif"),
 };
 
 const numberSounds = {
-  One: require("../../assets/alphabetSounds/A.mp3"),
-  B: require("../../assets/alphabetSounds/b.mp3"),
+  one: require("../../assets/numberSounds/number1.mp3"),
+  two: require("../../assets/numberSounds/number2.mp3"),
+  three: require("../../assets/numberSounds/number3.mp3"),
+  four: require("../../assets/numberSounds/number4.mp3"),
+  five: require("../../assets/numberSounds/number5.mp3"),
+  six: require("../../assets/numberSounds/number6.mp3"),
+  // seven: require("../../assets/numberSounds/a.mp3"),
+  // eight: require("../../assets/numberSounds/b.mp3"),
+  // nine: require("../../assets/numberSounds/a.mp3"),
+  // ten: require("../../assets/numberSounds/b.mp3"),
 };
 
 const Numbers = () => {
   const [currentNumber, setCurrentNumber] =
-    useState<keyof typeof numberGif>("One");
+    useState<keyof typeof numberGif>("one");
 
   const changeAlphabet = (direction: string) => {
     const numberList = Object.keys(numberGif) as (keyof typeof numberGif)[];

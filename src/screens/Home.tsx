@@ -71,7 +71,7 @@ const Home = () => {
             </View>
           </View>
         </Swiper>
-        <SwipeIndicator numberOfScreens={3} activeIndex={activeIndex} />
+        <SwipeIndicator numberOfScreens={2} activeIndex={activeIndex} />
       </ImageBackground>
     </SafeAreaView>
   );

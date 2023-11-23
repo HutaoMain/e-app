@@ -13,6 +13,8 @@ export type LearningStackNavigation = {
   Shapes: undefined;
   Math: undefined;
   Emotions: undefined;
+  // // Quizzes
+  // QuizAlphabets: undefined;
 };
 
 export type LearningStackProps = NativeStackScreenProps<

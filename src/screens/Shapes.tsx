@@ -5,47 +5,47 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
+  Switch,
+  Text,
 } from "react-native";
 import { Audio } from "expo-av";
 import ScreenNavbar from "../components/ScreenNavbar";
-
-const shapesGifs = {
-  Circle: require("../../assets/shapes/circle/circle-clouds.gif"),
-  B: require("../../assets/letters/B/letterB.gif"),
-};
-
-const shapesSounds = {
-  Circle: require("../../assets/alphabetSounds/A.mp3"),
-  B: require("../../assets/alphabetSounds/b.mp3"),
-};
+import { shapesGifs, shapesSounds } from "../types/Utilities";
+import QuizShapes from "./Quiz/QuizShapes";
 
 const Shapes = () => {
-  const [currentAlphabet, setCurrentAlphabet] =
-    useState<keyof typeof shapesGifs>("Circle");
+  const [showQuiz, setShowQuiz] = useState<boolean>(false);
+  const [currentShape, setCurrentShape] =
+    useState<keyof typeof shapesGifs>("circle");
 
   const changeAlphabet = (direction: string) => {
-    const alphabetList = Object.keys(shapesGifs) as (keyof typeof shapesGifs)[];
-    const currentIndex = alphabetList.indexOf(currentAlphabet);
+    const shapeList = Object.keys(shapesGifs) as (keyof typeof shapesGifs)[];
+    const currentIndex = shapeList.indexOf(currentShape);
 
     let newIndex;
     if (direction === "right") {
-      newIndex = (currentIndex + 1) % alphabetList.length;
+      newIndex = (currentIndex + 1) % shapeList.length;
     } else {
-      newIndex = (currentIndex - 1 + alphabetList.length) % alphabetList.length;
+      newIndex = (currentIndex - 1 + shapeList.length) % shapeList.length;
     }
 
-    setCurrentAlphabet(alphabetList[newIndex]);
+    setCurrentShape(shapeList[newIndex]);
+    setShowQuiz(false);
   };
 
   const playSound = async () => {
-    console.log(currentAlphabet);
+    console.log(currentShape);
     console.log("Loading Sound");
-    if (currentAlphabet) {
+    if (currentShape) {
       const { sound } = await Audio.Sound.createAsync(
-        shapesSounds[currentAlphabet]
+        shapesSounds[currentShape]
       );
       await sound.playAsync();
     }
+  };
+
+  const toggleComponent = () => {
+    setShowQuiz(!showQuiz);
   };
 
   return (
@@ -55,7 +55,42 @@ const Shapes = () => {
         style={styles.container}
       >
         <ScreenNavbar />
-        <Image source={shapesGifs[currentAlphabet] as any} style={styles.gif} />
+
+        <View style={styles.toggleContainer}>
+          <Text
+            style={{
+              fontFamily: "AmaticSC-Bold",
+              fontSize: 40,
+              marginRight: 10,
+            }}
+          >
+            Switch here to go to Quiz
+          </Text>
+          <Switch
+            value={showQuiz}
+            onValueChange={toggleComponent}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={showQuiz ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            style={styles.switch}
+          />
+        </View>
+
+        {showQuiz ? (
+          <QuizShapes
+            currentShape={currentShape}
+            shapeList={Object.keys(shapesGifs) as (keyof typeof shapesGifs)[]}
+            onSelectAnswer={(isCorrect) => {
+              // Handle the answer, e.g., show a message or update score
+              console.log(
+                `Selected ${isCorrect ? "correct" : "incorrect"} answer`
+              );
+              // Proceed to the next question or handle as needed
+            }}
+          />
+        ) : (
+          <Image source={shapesGifs[currentShape] as any} style={styles.gif} />
+        )}
 
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
@@ -99,6 +134,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
+  },
+  toggleContainer: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    marginTop: 40,
+  },
+  switch: {
+    alignSelf: "center",
+    transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }], // Adjust the size of the switch
   },
   gif: {
     width: 400,

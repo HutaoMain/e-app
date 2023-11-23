@@ -8,6 +8,7 @@ import Animals from "../screens/Animals";
 import Shapes from "../screens/Shapes";
 import Math from "../screens/Math";
 import Emotions from "../screens/Emotions";
+import AlphabetList from "../screens/AlphabetList";
 
 const HomeStackNavigation = () => {
   const HomeStack = createNativeStackNavigator<LearningStackNavigation>();
@@ -49,6 +50,12 @@ const HomeStackNavigation = () => {
         component={Emotions}
         options={{ headerShown: false }}
       />
+      {/*TODO Quizzes */}
+      {/* <HomeStack.Screen
+        name="QuizAlphabets"
+        component={QuizAlphabets}
+        options={{ headerShown: false }}
+      /> */}
     </HomeStack.Navigator>
   );
 };

@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const alphabetData = [
   {
     letter: "A",
-    audioFileName: require("../../assets/alphabetSounds/A.mp3"),
+    audioFileName: require("../../assets/alphabetSounds/a.mp3"),
   },
   {
     letter: "B",
@@ -119,7 +119,7 @@ const colors = [
   "#B375F7",
 ];
 
-const QuizAlphabets = () => {
+const AlphabetList = () => {
   const playSound = async (audioFile: number) => {
     console.log(audioFile);
     console.log("Loading Sound");
@@ -182,4 +182,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default QuizAlphabets;
+export default AlphabetList;
