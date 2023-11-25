@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Button,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
-import { shapesGifs, shapesSounds } from "../../types/Utilities";
+import { shapesGifs } from "../../types/Utilities";
 
 interface QuizShapesProps {
   currentShape: any;

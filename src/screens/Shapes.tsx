@@ -18,7 +18,7 @@ const Shapes = () => {
   const [currentShape, setCurrentShape] =
     useState<keyof typeof shapesGifs>("circle");
 
-  const changeAlphabet = (direction: string) => {
+  const changeShape = (direction: string) => {
     const shapeList = Object.keys(shapesGifs) as (keyof typeof shapesGifs)[];
     const currentIndex = shapeList.indexOf(currentShape);
 
@@ -94,7 +94,7 @@ const Shapes = () => {
 
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
-            onPress={() => changeAlphabet("left")}
+            onPress={() => changeShape("left")}
             style={styles.button}
           >
             <Image
@@ -111,7 +111,7 @@ const Shapes = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => changeAlphabet("right")}
+            onPress={() => changeShape("right")}
             style={styles.button}
           >
             <Image

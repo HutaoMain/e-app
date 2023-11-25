@@ -1,40 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { emotionGif } from "../../types/Utilities";
 import ConfettiCannon from "react-native-confetti-cannon";
-import { animalGif } from "../../types/Utilities";
 
-interface QuizAnimalsProps {
-  currentAnimal: any;
-  animalList: string[];
+interface QuizProps {
+  currentEmotion: any;
+  emotionList: string[];
   onSelectAnswer: (isCorrect: boolean) => void;
 }
 
-const QuizAnimals = ({
-  currentAnimal,
-  animalList,
+const QuizEmotions = ({
+  currentEmotion,
+  emotionList,
   onSelectAnswer,
-}: QuizAnimalsProps) => {
+}: QuizProps) => {
   const [answerOptions, setAnswerOptions] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
-    const shuffledOptions = [...animalList]
+    const shuffledOptions = [...emotionList]
       .sort(() => Math.random() - 0.5)
-      .filter((animal) => animal !== currentAnimal);
+      .filter((emotion) => emotion !== currentEmotion);
 
     const optionsToShow = shuffledOptions.slice(0, 3);
 
-    const allOptions = [...optionsToShow, currentAnimal];
+    const allOptions = [...optionsToShow, currentEmotion];
 
     const shuffledAllOptions = allOptions.sort(() => Math.random() - 0.5);
 
     setAnswerOptions(shuffledAllOptions);
-  }, [currentAnimal, animalList]);
+  }, [currentEmotion, emotionList]);
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
-    if (option === currentAnimal) {
+    if (option === currentEmotion) {
       setShowConfetti(true);
       setTimeout(() => {
         setShowConfetti(false);
@@ -46,7 +46,7 @@ const QuizAnimals = ({
 
   const handleAnswerSubmit = () => {
     if (selectedOption !== null) {
-      onSelectAnswer(selectedOption === currentAnimal);
+      onSelectAnswer(selectedOption === currentEmotion);
       setSelectedOption(null);
     }
   };
@@ -61,7 +61,7 @@ const QuizAnimals = ({
       }}
     >
       <Text style={styles.questionText}>
-        What is the animal shown in the image?
+        What is the emotion shown in the image?
       </Text>
       <View style={styles.optionsContainer}>
         {answerOptions.map((option, index) => (
@@ -75,7 +75,7 @@ const QuizAnimals = ({
           >
             <Text style={styles.optionText}>{option}</Text>
             <Image
-              source={animalGif[option] as any}
+              source={emotionGif[option] as any}
               style={styles.optionImage}
             />
           </TouchableOpacity>
@@ -103,6 +103,10 @@ const QuizAnimals = ({
 };
 
 const styles = StyleSheet.create({
+  quizContainer: {
+    alignItems: "center",
+    marginTop: 20,
+  },
   questionText: {
     fontSize: 18,
     fontWeight: "bold",
@@ -152,5 +156,4 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
 });
-
-export default QuizAnimals;
+export default QuizEmotions;

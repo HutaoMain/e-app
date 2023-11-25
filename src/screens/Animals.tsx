@@ -4,26 +4,21 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  Text,
+  Switch,
 } from "react-native";
 import React, { useState } from "react";
 import ScreenNavbar from "../components/ScreenNavbar";
 import { Audio } from "expo-av";
-
-const animalGif = {
-  Cat: require("../../assets/animals/cat/cat-cute.gif"),
-  B: require("../../assets/letters/B/letterB.gif"),
-};
-
-const animalSounds = {
-  Cat: require("../../assets/alphabetSounds/a.mp3"),
-  B: require("../../assets/alphabetSounds/b.mp3"),
-};
+import { animalGif, animalSounds } from "../types/Utilities";
+import QuizAnimals from "./Quiz/QuizAnimals";
 
 const Animals = () => {
+  const [showQuiz, setShowQuiz] = useState<boolean>(false);
   const [currentAnimal, setCurrentAnimal] =
-    useState<keyof typeof animalGif>("Cat");
+    useState<keyof typeof animalGif>("cat");
 
-  const changeAlphabet = (direction: string) => {
+  const changeAnimal = (direction: string) => {
     const animalList = Object.keys(animalGif) as (keyof typeof animalGif)[];
     const currentIndex = animalList.indexOf(currentAnimal);
 
@@ -35,6 +30,7 @@ const Animals = () => {
     }
 
     setCurrentAnimal(animalList[newIndex]);
+    setShowQuiz(false);
   };
 
   const playSound = async () => {
@@ -48,6 +44,10 @@ const Animals = () => {
     }
   };
 
+  const toggleComponent = () => {
+    setShowQuiz(!showQuiz);
+  };
+
   return (
     <View style={styles.animals}>
       <ImageBackground
@@ -55,11 +55,44 @@ const Animals = () => {
         style={styles.container}
       >
         <ScreenNavbar />
-        <Image source={animalGif[currentAnimal] as any} style={styles.gif} />
+
+        <View style={styles.toggleContainer}>
+          <Text
+            style={{
+              fontFamily: "AmaticSC-Bold",
+              fontSize: 40,
+              marginRight: 10,
+            }}
+          >
+            Switch here to go to Quiz
+          </Text>
+          <Switch
+            value={showQuiz}
+            onValueChange={toggleComponent}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={showQuiz ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            style={styles.switch}
+          />
+        </View>
+
+        {showQuiz ? (
+          <QuizAnimals
+            currentAnimal={currentAnimal}
+            animalList={Object.keys(animalGif) as (keyof typeof animalGif)[]}
+            onSelectAnswer={(isCorrect) => {
+              console.log(
+                `Selected ${isCorrect ? "correct" : "incorrect"} answer`
+              );
+            }}
+          />
+        ) : (
+          <Image source={animalGif[currentAnimal] as any} style={styles.gif} />
+        )}
 
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
-            onPress={() => changeAlphabet("left")}
+            onPress={() => changeAnimal("left")}
             style={styles.button}
           >
             <Image
@@ -76,7 +109,7 @@ const Animals = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => changeAlphabet("right")}
+            onPress={() => changeAnimal("right")}
             style={styles.button}
           >
             <Image
@@ -99,6 +132,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
+  },
+  toggleContainer: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    marginTop: 40,
+  },
+  switch: {
+    alignSelf: "center",
+    transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }], // Adjust the size of the switch
   },
   gif: {
     width: 400,

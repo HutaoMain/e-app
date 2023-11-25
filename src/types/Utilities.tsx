@@ -73,3 +73,83 @@ export const shapesSounds: Record<string, any> = {
   square: require("../../assets/shapeSounds/square.mp3"),
   triangle: require("../../assets/shapeSounds/triangle.mp3"),
 };
+
+//* Numbers
+export const numberGif: Record<string, any> = {
+  one: require("../../assets/numbers/one/number1.gif"),
+  two: require("../../assets/numbers/two/number2.gif"),
+  three: require("../../assets/numbers/three/number3.gif"),
+  four: require("../../assets/numbers/four/number4.gif"),
+  five: require("../../assets/numbers/five/number5.gif"),
+  six: require("../../assets/numbers/six/number6.gif"),
+  seven: require("../../assets/numbers/seven/number7.gif"),
+  eight: require("../../assets/numbers/eight/number8.gif"),
+  nine: require("../../assets/numbers/nine/number9.gif"),
+  ten: require("../../assets/numbers/ten/number10.gif"),
+};
+
+export const numberSounds: Record<string, any> = {
+  one: require("../../assets/numberSounds/number1.mp3"),
+  two: require("../../assets/numberSounds/number2.mp3"),
+  three: require("../../assets/numberSounds/number3.mp3"),
+  four: require("../../assets/numberSounds/number4.mp3"),
+  five: require("../../assets/numberSounds/number5.mp3"),
+  six: require("../../assets/numberSounds/number6.mp3"),
+  seven: require("../../assets/numberSounds/number7.mp3"),
+  eight: require("../../assets/numberSounds/number8.mp3"),
+  nine: require("../../assets/numberSounds/number9.mp3"),
+  ten: require("../../assets/numberSounds/number10.mp3"),
+};
+
+// * Animals
+export const animalGif: Record<string, any> = {
+  cat: require("../../assets/animals/cat.gif"),
+  dog: require("../../assets/animals/dog.gif"),
+  lion: require("../../assets/animals/lion.gif"),
+  pig: require("../../assets/animals/pig.gif"),
+  rabbit: require("../../assets/animals/rabbit.gif"),
+  sheep: require("../../assets/animals/sheep.gif"),
+  turtle: require("../../assets/animals/turtle.gif"),
+  bird: require("../../assets/animals/bird.gif"),
+};
+
+export const animalSounds: Record<string, any> = {
+  cat: require("../../assets/animalSounds/cat.mp3"),
+  dog: require("../../assets/animalSounds/dog.mp3"),
+  lion: require("../../assets/animalSounds/lion.mp3"),
+  pig: require("../../assets/animalSounds/pig.mp3"),
+  rabbit: require("../../assets/animalSounds/rabbit.mp3"),
+  sheep: require("../../assets/animalSounds/sheep.mp3"),
+  turtle: require("../../assets/animalSounds/turtle.mp3"),
+  bird: require("../../assets/animalSounds/bird.mp3"),
+};
+
+// * Math
+export const mathGif: Record<string, any> = {
+  addition: require("../../assets/math/addition.gif"),
+  subtraction: require("../../assets/math/subtraction.gif"),
+  multiplication: require("../../assets/math/multiplication.gif"),
+  division: require("../../assets/math/division.gif"),
+};
+
+export const mathSounds: Record<string, any> = {
+  addition: require("../../assets/mathSounds/addition.mp3"),
+  subtraction: require("../../assets/mathSounds/subtraction.mp3"),
+  multiplication: require("../../assets/mathSounds/multiplication.mp3"),
+  division: require("../../assets/mathSounds/division.mp3"),
+};
+
+// * Emotions
+export const emotionGif: Record<string, any> = {
+  happy: require("../../assets/emotions/happy.gif"),
+  sad: require("../../assets/emotions/sad.gif"),
+  tired: require("../../assets/emotions/tired.gif"),
+  crying: require("../../assets/emotions/crying.gif"),
+};
+
+export const emotionSounds: Record<string, any> = {
+  happy: require("../../assets/emotionSounds/happy.mp3"),
+  sad: require("../../assets/emotionSounds/sad.mp3"),
+  tired: require("../../assets/emotionSounds/tired.mp3"),
+  crying: require("../../assets/emotionSounds/crying.mp3"),
+};

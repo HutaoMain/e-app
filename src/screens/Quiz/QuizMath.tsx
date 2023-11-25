@@ -1,40 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
-import { animalGif } from "../../types/Utilities";
+import { mathGif, shapesGifs } from "../../types/Utilities";
 
-interface QuizAnimalsProps {
-  currentAnimal: any;
-  animalList: string[];
+interface QuizMathProps {
+  currentMath: any;
+  mathList: string[];
   onSelectAnswer: (isCorrect: boolean) => void;
 }
 
-const QuizAnimals = ({
-  currentAnimal,
-  animalList,
-  onSelectAnswer,
-}: QuizAnimalsProps) => {
+const QuizMath = ({ currentMath, mathList, onSelectAnswer }: QuizMathProps) => {
   const [answerOptions, setAnswerOptions] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
-    const shuffledOptions = [...animalList]
+    const shuffledOptions = [...mathList]
       .sort(() => Math.random() - 0.5)
-      .filter((animal) => animal !== currentAnimal);
+      .filter((operation) => operation !== currentMath);
 
     const optionsToShow = shuffledOptions.slice(0, 3);
 
-    const allOptions = [...optionsToShow, currentAnimal];
+    const allOptions = [...optionsToShow, currentMath];
 
     const shuffledAllOptions = allOptions.sort(() => Math.random() - 0.5);
 
     setAnswerOptions(shuffledAllOptions);
-  }, [currentAnimal, animalList]);
+  }, [currentMath, mathList]);
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
-    if (option === currentAnimal) {
+    if (option === currentMath) {
       setShowConfetti(true);
       setTimeout(() => {
         setShowConfetti(false);
@@ -46,7 +42,7 @@ const QuizAnimals = ({
 
   const handleAnswerSubmit = () => {
     if (selectedOption !== null) {
-      onSelectAnswer(selectedOption === currentAnimal);
+      onSelectAnswer(selectedOption === currentMath);
       setSelectedOption(null);
     }
   };
@@ -61,7 +57,7 @@ const QuizAnimals = ({
       }}
     >
       <Text style={styles.questionText}>
-        What is the animal shown in the image?
+        What is the Operation for the image shown?
       </Text>
       <View style={styles.optionsContainer}>
         {answerOptions.map((option, index) => (
@@ -74,10 +70,7 @@ const QuizAnimals = ({
             onPress={() => handleOptionSelect(option)}
           >
             <Text style={styles.optionText}>{option}</Text>
-            <Image
-              source={animalGif[option] as any}
-              style={styles.optionImage}
-            />
+            <Image source={mathGif[option] as any} style={styles.optionImage} />
           </TouchableOpacity>
         ))}
       </View>
@@ -153,4 +146,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default QuizAnimals;
+export default QuizMath;

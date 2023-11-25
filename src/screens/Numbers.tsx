@@ -4,42 +4,21 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  Text,
+  Switch,
 } from "react-native";
 import React, { useState } from "react";
 import ScreenNavbar from "../components/ScreenNavbar";
 import { Audio } from "expo-av";
-
-const numberGif = {
-  one: require("../../assets/numbers/one/number1.gif"),
-  two: require("../../assets/numbers/two/number2.gif"),
-  three: require("../../assets/numbers/three/number3.gif"),
-  four: require("../../assets/numbers/four/number4.gif"),
-  five: require("../../assets/numbers/five/number5.gif"),
-  six: require("../../assets/numbers/six/number6.gif"),
-  // seven: require("../../assets/numbers/seven/number7.gif"),
-  // eight: require("../../assets/numbers/eight/number8.gif"),
-  // nine: require("../../assets/numbers/nine/number9.gif"),
-  // ten: require("../../assets/numbers/ten/number10.gif"),
-};
-
-const numberSounds = {
-  one: require("../../assets/numberSounds/number1.mp3"),
-  two: require("../../assets/numberSounds/number2.mp3"),
-  three: require("../../assets/numberSounds/number3.mp3"),
-  four: require("../../assets/numberSounds/number4.mp3"),
-  five: require("../../assets/numberSounds/number5.mp3"),
-  six: require("../../assets/numberSounds/number6.mp3"),
-  // seven: require("../../assets/numberSounds/a.mp3"),
-  // eight: require("../../assets/numberSounds/b.mp3"),
-  // nine: require("../../assets/numberSounds/a.mp3"),
-  // ten: require("../../assets/numberSounds/b.mp3"),
-};
+import { numberGif, numberSounds } from "../types/Utilities";
+import QuizNumbers from "./Quiz/QuizNumbers";
 
 const Numbers = () => {
+  const [showQuiz, setShowQuiz] = useState<boolean>(false);
   const [currentNumber, setCurrentNumber] =
     useState<keyof typeof numberGif>("one");
 
-  const changeAlphabet = (direction: string) => {
+  const changeNumber = (direction: string) => {
     const numberList = Object.keys(numberGif) as (keyof typeof numberGif)[];
     const currentIndex = numberList.indexOf(currentNumber);
 
@@ -51,6 +30,7 @@ const Numbers = () => {
     }
 
     setCurrentNumber(numberList[newIndex]);
+    setShowQuiz(false);
   };
 
   const playSound = async () => {
@@ -64,6 +44,10 @@ const Numbers = () => {
     }
   };
 
+  const toggleComponent = () => {
+    setShowQuiz(!showQuiz);
+  };
+
   return (
     <View style={styles.numbers}>
       <ImageBackground
@@ -71,11 +55,46 @@ const Numbers = () => {
         style={styles.container}
       >
         <ScreenNavbar />
-        <Image source={numberGif[currentNumber] as any} style={styles.gif} />
+
+        <View style={styles.toggleContainer}>
+          <Text
+            style={{
+              fontFamily: "AmaticSC-Bold",
+              fontSize: 40,
+              marginRight: 10,
+            }}
+          >
+            Switch here to go to Quiz
+          </Text>
+          <Switch
+            value={showQuiz}
+            onValueChange={toggleComponent}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={showQuiz ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            style={styles.switch}
+          />
+        </View>
+
+        {showQuiz ? (
+          <QuizNumbers
+            currentNumber={currentNumber}
+            numberList={Object.keys(numberGif) as (keyof typeof numberGif)[]}
+            onSelectAnswer={(isCorrect) => {
+              // Handle the answer, e.g., show a message or update score
+              console.log(
+                `Selected ${isCorrect ? "correct" : "incorrect"} answer`
+              );
+              // Proceed to the next question or handle as needed
+            }}
+          />
+        ) : (
+          <Image source={numberGif[currentNumber] as any} style={styles.gif} />
+        )}
 
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
-            onPress={() => changeAlphabet("left")}
+            onPress={() => changeNumber("left")}
             style={styles.button}
           >
             <Image
@@ -92,7 +111,7 @@ const Numbers = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => changeAlphabet("right")}
+            onPress={() => changeNumber("right")}
             style={styles.button}
           >
             <Image
@@ -115,6 +134,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
+  },
+  toggleContainer: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    marginTop: 40,
+  },
+  switch: {
+    alignSelf: "center",
+    transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }], // Adjust the size of the switch
   },
   gif: {
     width: 400,
