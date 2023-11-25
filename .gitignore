@@ -35,8 +35,8 @@ yarn-error.*
 *.tsbuildinfo
 
 
-/src/API_URL.tsx
-
+/src/ENV.tsx
 .vscode
 package-lock.json
-assets
+# assets
+.prettierrc

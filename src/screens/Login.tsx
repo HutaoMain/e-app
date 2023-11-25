@@ -13,7 +13,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthStackNavigationType } from "../types/NavigationTypes";
 import useAuthStore from "../zustand/AuthStore";
 import { AntDesign } from "@expo/vector-icons";
-import { FIREBASE_AUTH } from "../API_URL";
+import { FIREBASE_AUTH } from "../FirebaseConfig";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { signInWithEmailAndPassword } from "firebase/auth";
 

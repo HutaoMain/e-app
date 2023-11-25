@@ -15,7 +15,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import dayjs from "dayjs";
 import Toast from "react-native-toast-message";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { FIREBASE_AUTH } from "../API_URL";
+import { FIREBASE_AUTH } from "../FirebaseConfig";
 import {
   AntDesign,
   Fontisto,

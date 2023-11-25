@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
-import { mathGif, shapesGifs } from "../../types/Utilities";
+import { mathGif } from "../../types/Utilities";
 
 interface QuizMathProps {
   currentMath: any;
