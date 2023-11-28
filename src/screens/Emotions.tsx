@@ -80,6 +80,7 @@ const Emotions = () => {
           <QuizEmotions
             currentEmotion={currentEmotion}
             emotionList={Object.keys(emotionGif) as (keyof typeof emotionGif)[]}
+            changeEmotion={changeEmotion}
             onSelectAnswer={(isCorrect) => {
               console.log(
                 `Selected ${isCorrect ? "correct" : "incorrect"} answer`

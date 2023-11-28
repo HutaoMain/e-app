@@ -80,6 +80,7 @@ const Animals = () => {
           <QuizAnimals
             currentAnimal={currentAnimal}
             animalList={Object.keys(animalGif) as (keyof typeof animalGif)[]}
+            changeAnimal={changeAnimal}
             onSelectAnswer={(isCorrect) => {
               console.log(
                 `Selected ${isCorrect ? "correct" : "incorrect"} answer`

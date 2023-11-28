@@ -1,30 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Modal,
+} from "react-native";
 import { alphabetGifs } from "../../types/Utilities";
 import ConfettiCannon from "react-native-confetti-cannon";
+import { Audio } from "expo-av";
 
 interface QuizProps {
   currentAlphabet: any;
   alphabetList: string[];
   onSelectAnswer: (isCorrect: boolean) => void;
+  changeAlphabet: (direction: string) => void;
 }
 
 const QuizAlphabets = ({
   currentAlphabet,
   alphabetList,
   onSelectAnswer,
+  changeAlphabet,
 }: QuizProps) => {
   const [answerOptions, setAnswerOptions] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
+  // ! added
+  const [successModalVisible, setSuccessModalVisible] = useState(false);
+  const [failureModalVisible, setFailureModalVisible] = useState(false);
 
   useEffect(() => {
-    // Shuffle the alphabet list and filter out the current alphabet
     const shuffledOptions = [...alphabetList]
       .sort(() => Math.random() - 0.5)
       .filter((letter) => letter !== currentAlphabet);
 
-    // Take the first 3 shuffled options
     const optionsToShow = shuffledOptions.slice(0, 3);
 
     const allOptions = [...optionsToShow, currentAlphabet];
@@ -34,23 +45,51 @@ const QuizAlphabets = ({
     setAnswerOptions(shuffledAllOptions);
   }, [currentAlphabet, alphabetList]);
 
+  const playSoundFailure = async () => {
+    console.log("Loading Success Sound");
+
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../../assets/failure.mp3")
+    );
+
+    await sound.playAsync();
+  };
+
+  const playSoundSuccess = async () => {
+    console.log("Loading Success Sound");
+
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../../assets/success.mp3")
+    );
+
+    await sound.playAsync();
+  };
+
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
-    if (option === currentAlphabet) {
-      setShowConfetti(true);
-      // Additional logic for displaying correct answer message can be added here
-      setTimeout(() => {
-        setShowConfetti(false);
-        onSelectAnswer(true);
-        setSelectedOption(null);
-      }, 5000); // Adjust the duration as needed
-    }
   };
 
   const handleAnswerSubmit = () => {
     if (selectedOption !== null) {
-      onSelectAnswer(selectedOption === currentAlphabet);
-      setSelectedOption(null);
+      if (selectedOption === currentAlphabet) {
+        onSelectAnswer(selectedOption === currentAlphabet);
+        setShowConfetti(true);
+        playSoundSuccess();
+        setSuccessModalVisible(true);
+        setTimeout(() => {
+          setShowConfetti(false);
+          onSelectAnswer(true);
+          setSelectedOption(null);
+          setSuccessModalVisible(false);
+          changeAlphabet("right");
+        }, 5000);
+      } else {
+        playSoundFailure();
+        setFailureModalVisible(true);
+        setTimeout(() => {
+          setFailureModalVisible(false);
+        }, 3000);
+      }
     }
   };
 
@@ -78,7 +117,7 @@ const QuizAlphabets = ({
           >
             <Text style={styles.optionText}>{option}</Text>
             <Image
-              source={alphabetGifs[option] as any} // Replace with your actual source
+              source={alphabetGifs[option] as any}
               style={styles.optionImage}
             />
           </TouchableOpacity>
@@ -101,6 +140,18 @@ const QuizAlphabets = ({
           autoStart
         />
       )}
+
+      <Modal visible={successModalVisible} transparent animationType="slide">
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalText}>Congratulations!</Text>
+        </View>
+      </Modal>
+
+      <Modal visible={failureModalVisible} transparent animationType="slide">
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalText}>Please try again.</Text>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -156,6 +207,18 @@ const styles = StyleSheet.create({
   submitButtonText: {
     textAlign: "center",
     fontSize: 20,
+    color: "#ffffff",
+  },
+  // ! added
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalText: {
+    fontSize: 24,
+    fontWeight: "bold",
     color: "#ffffff",
   },
 });

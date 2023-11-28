@@ -78,6 +78,7 @@ const Math = () => {
           <QuizMath
             currentMath={currentMath}
             mathList={Object.keys(mathGif) as (keyof typeof mathGif)[]}
+            changeOperation={changeOperation}
             onSelectAnswer={(isCorrect) => {
               console.log(
                 `Selected ${isCorrect ? "correct" : "incorrect"} answer`

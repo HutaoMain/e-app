@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Modal,
+} from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
 import { animalGif } from "../../types/Utilities";
+import { Audio } from "expo-av";
 
 interface QuizAnimalsProps {
   currentAnimal: any;
   animalList: string[];
   onSelectAnswer: (isCorrect: boolean) => void;
+  changeAnimal: (direction: string) => void;
 }
 
 const QuizAnimals = ({
   currentAnimal,
   animalList,
   onSelectAnswer,
+  changeAnimal,
 }: QuizAnimalsProps) => {
   const [answerOptions, setAnswerOptions] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [successModalVisible, setSuccessModalVisible] = useState(false);
+  const [failureModalVisible, setFailureModalVisible] = useState(false);
 
   useEffect(() => {
     const shuffledOptions = [...animalList]
@@ -32,22 +44,51 @@ const QuizAnimals = ({
     setAnswerOptions(shuffledAllOptions);
   }, [currentAnimal, animalList]);
 
+  const playSoundFailure = async () => {
+    console.log("Loading Success Sound");
+
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../../assets/failure.mp3")
+    );
+
+    await sound.playAsync();
+  };
+
+  const playSoundSuccess = async () => {
+    console.log("Loading Success Sound");
+
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../../assets/success.mp3")
+    );
+
+    await sound.playAsync();
+  };
+
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
-    if (option === currentAnimal) {
-      setShowConfetti(true);
-      setTimeout(() => {
-        setShowConfetti(false);
-        onSelectAnswer(true);
-        setSelectedOption(null);
-      }, 5000);
-    }
   };
 
   const handleAnswerSubmit = () => {
     if (selectedOption !== null) {
-      onSelectAnswer(selectedOption === currentAnimal);
-      setSelectedOption(null);
+      if (selectedOption === currentAnimal) {
+        onSelectAnswer(selectedOption === currentAnimal);
+        setShowConfetti(true);
+        playSoundSuccess();
+        setSuccessModalVisible(true);
+        setTimeout(() => {
+          setShowConfetti(false);
+          onSelectAnswer(true);
+          setSelectedOption(null);
+          setSuccessModalVisible(false);
+          changeAnimal("right");
+        }, 5000);
+      } else {
+        playSoundFailure();
+        setFailureModalVisible(true);
+        setTimeout(() => {
+          setFailureModalVisible(false);
+        }, 3000);
+      }
     }
   };
 
@@ -98,6 +139,18 @@ const QuizAnimals = ({
           autoStart
         />
       )}
+
+      <Modal visible={successModalVisible} transparent animationType="slide">
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalText}>Congratulations!</Text>
+        </View>
+      </Modal>
+
+      <Modal visible={failureModalVisible} transparent animationType="slide">
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalText}>Please try again.</Text>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -149,6 +202,17 @@ const styles = StyleSheet.create({
   submitButtonText: {
     textAlign: "center",
     fontSize: 20,
+    color: "#ffffff",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalText: {
+    fontSize: 24,
+    fontWeight: "bold",
     color: "#ffffff",
   },
 });

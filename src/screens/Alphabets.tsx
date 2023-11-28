@@ -84,12 +84,11 @@ const Alphabets = () => {
             alphabetList={
               Object.keys(alphabetGifs) as (keyof typeof alphabetGifs)[]
             }
+            changeAlphabet={changeAlphabet}
             onSelectAnswer={(isCorrect) => {
-              // Handle the answer, e.g., show a message or update score
               console.log(
                 `Selected ${isCorrect ? "correct" : "incorrect"} answer`
               );
-              // Proceed to the next question or handle as needed
             }}
           />
         ) : (

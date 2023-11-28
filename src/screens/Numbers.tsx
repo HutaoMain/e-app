@@ -80,6 +80,7 @@ const Numbers = () => {
           <QuizNumbers
             currentNumber={currentNumber}
             numberList={Object.keys(numberGif) as (keyof typeof numberGif)[]}
+            changeNumber={changeNumber}
             onSelectAnswer={(isCorrect) => {
               // Handle the answer, e.g., show a message or update score
               console.log(
