@@ -8,7 +8,7 @@ const RootNavigation = () => {
   const user = useAuthStore((state) => state.user);
   return (
     <NavigationContainer>
-      {user ? <HomeStackNavigation /> : <AuthStackNavigation />}
+      {!user ? <HomeStackNavigation /> : <AuthStackNavigation />}
     </NavigationContainer>
   );
 };

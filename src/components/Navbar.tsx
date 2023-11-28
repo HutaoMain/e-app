@@ -1,7 +1,10 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
+import useAuthStore from "../zustand/AuthStore";
 
 const Navbar = () => {
+  const user = useAuthStore((state) => state.user);
+
   return (
     <View style={styles.container}>
       <View>
@@ -9,7 +12,7 @@ const Navbar = () => {
           Welcome,
         </Text>
         <Text style={{ fontFamily: "AmaticSC-Bold", fontSize: 30 }}>
-          John Smith
+          {user}
         </Text>
       </View>
       <Image

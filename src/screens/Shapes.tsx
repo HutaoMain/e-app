@@ -80,6 +80,7 @@ const Shapes = () => {
           <QuizShapes
             currentShape={currentShape}
             shapeList={Object.keys(shapesGifs) as (keyof typeof shapesGifs)[]}
+            changeShape={changeShape}
             onSelectAnswer={(isCorrect) => {
               // Handle the answer, e.g., show a message or update score
               console.log(
