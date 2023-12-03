@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeStackNavigation from "./HomeStackNavigation";
+import Video from "../screens/Video";
 
 const BottomTabNavigation = () => {
   const Tab = createBottomTabNavigator();
@@ -13,8 +14,8 @@ const BottomTabNavigation = () => {
 
           if (route.name === "HomeStack") {
             iconName = focused ? "home" : "home-outline";
-          } else if (route.name === "Person") {
-            iconName = focused ? "person" : "person-outline";
+          } else if (route.name === "Video") {
+            iconName = focused ? "ios-videocam" : "ios-videocam-outline";
           }
 
           return (
@@ -35,6 +36,11 @@ const BottomTabNavigation = () => {
       <Tab.Screen
         name="HomeStack"
         component={HomeStackNavigation}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Video"
+        component={Video}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>
