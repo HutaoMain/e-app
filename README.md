@@ -1,4 +1,1 @@
-# e-app
-
-     fontFamily: "AmaticSC-Bold",
-                      fontSize: 50,
+# educational-app
