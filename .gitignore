@@ -37,6 +37,6 @@ yarn-error.*
 
 .prettierrc
 .vscode
-/src/ENV.tsx
+src/ENV.tsx
 # package-lock.json
 # assets
