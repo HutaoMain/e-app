@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#3498db",
     borderRadius: 10,
-    width: 400,
-    height: 200,
+    width: 370,
+    height: 180,
   },
   gradient: {
     flex: 1,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "50%",
-    height: 180,
+    height: 170,
     resizeMode: "contain",
   },
 });

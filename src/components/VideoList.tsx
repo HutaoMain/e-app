@@ -27,8 +27,8 @@ const VideoList = () => {
   const renderItem = ({ item }: { item: VideoItem }) => (
     <View style={styles.videoContainer}>
       <YoutubePlayer
-        height={300}
-        width={400}
+        height={200}
+        width={360}
         play={false}
         videoId={item.videoId}
       />
@@ -62,20 +62,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff0000",
     alignItems: "center",
     width: "100%",
+    marginBottom: 20,
   },
   headerText: {
     fontSize: 20,
     color: "white",
   },
   videoContainer: {
-    margin: 10,
+    height: 230,
+    width: "100%",
+    borderColor: "black",
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 8,
   },
   container: {
-    flex: 1,
-  },
-  video: {
-    flex: 1,
+    width: "100%",
   },
 });
 
